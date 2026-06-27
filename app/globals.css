@@ -9,6 +9,7 @@
   --dark-lavender: #514577;
   --amethyst: #7d68c0;
   --light-grey: #eceff2;
+  --ink: #15111f;
 }
 
 * {
@@ -21,8 +22,10 @@ html {
 
 body {
   margin: 0;
-  background: #ffffff;
-  color: #15111f;
+  background:
+    radial-gradient(circle at 50% -10%, rgba(221, 210, 255, 0.55), transparent 34rem),
+    linear-gradient(180deg, #ffffff 0%, #fbfbfd 48%, #ffffff 100%);
+  color: var(--ink);
   /* TODO: Replace this fallback stack with Parabolica when licensed font files are available. */
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   text-rendering: optimizeLegibility;
@@ -57,4 +60,120 @@ textarea {
   background:
     radial-gradient(circle at 18% 18%, rgba(221, 210, 255, 0.75), transparent 34%),
     linear-gradient(135deg, #2b2441 0%, #514577 55%, #7d68c0 100%);
+}
+
+.premium-shell {
+  position: relative;
+}
+
+.premium-shell::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background:
+    radial-gradient(circle at 12% 10%, rgba(221, 210, 255, 0.42), transparent 22rem),
+    radial-gradient(circle at 86% 8%, rgba(125, 104, 192, 0.16), transparent 24rem);
+}
+
+.surface-card {
+  border: 1px solid rgba(43, 36, 65, 0.1);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.78)),
+    rgba(255, 255, 255, 0.86);
+  box-shadow: 0 22px 70px rgba(43, 36, 65, 0.1);
+  backdrop-filter: blur(18px);
+}
+
+.dark-surface {
+  background:
+    radial-gradient(circle at 14% 12%, rgba(221, 210, 255, 0.22), transparent 24rem),
+    radial-gradient(circle at 84% 18%, rgba(125, 104, 192, 0.22), transparent 22rem),
+    linear-gradient(135deg, #201a32 0%, #2b2441 54%, #514577 100%);
+}
+
+.mesh-lines {
+  background-image:
+    linear-gradient(rgba(221, 210, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(221, 210, 255, 0.08) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(circle at 50% 35%, black, transparent 76%);
+}
+
+.world-orbit {
+  background:
+    radial-gradient(ellipse at center, rgba(221, 210, 255, 0.26), transparent 48%),
+    linear-gradient(90deg, transparent 49%, rgba(221, 210, 255, 0.22) 50%, transparent 51%),
+    linear-gradient(0deg, transparent 49%, rgba(221, 210, 255, 0.18) 50%, transparent 51%);
+}
+
+.world-orbit::before,
+.world-orbit::after {
+  position: absolute;
+  inset: 12%;
+  content: "";
+  border: 1px solid rgba(221, 210, 255, 0.22);
+  border-radius: 999px;
+}
+
+.world-orbit::after {
+  inset: 26% 8%;
+}
+
+.soft-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(43, 36, 65, 0.14), transparent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .float-slow {
+    animation: float-slow 7s ease-in-out infinite;
+  }
+
+  .float-delayed {
+    animation: float-slow 8s ease-in-out 1.2s infinite;
+  }
+
+  .pulse-glow {
+    animation: pulse-glow 6s ease-in-out infinite;
+  }
+
+  .reveal-up {
+    animation: reveal-up both;
+    animation-timeline: view();
+    animation-range: entry 12% cover 34%;
+  }
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -12px, 0);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 0.34;
+    transform: scale(0.98);
+  }
+  50% {
+    opacity: 0.68;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
