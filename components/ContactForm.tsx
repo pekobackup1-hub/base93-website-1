@@ -64,7 +64,7 @@ export function ContactForm() {
 
   if (submitted) {
     return (
-      <div className="rounded-lg border border-base-light bg-white p-8 shadow-soft">
+      <div className="surface-card rounded-lg p-8">
         <p className="text-sm font-bold uppercase tracking-[0.18em] text-base-amethyst">
           Enquiry received
         </p>
@@ -78,7 +78,7 @@ export function ContactForm() {
         <button
           type="button"
           onClick={() => setSubmitted(false)}
-          className="mt-6 rounded-md border border-base-deep/15 px-5 py-3 text-sm font-semibold text-base-deep transition hover:bg-base-grey focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-base-amethyst"
+          className="mt-6 rounded-md border border-base-deep/15 bg-white px-5 py-3 text-sm font-semibold text-base-deep shadow-[0_12px_32px_rgba(43,36,65,0.08)] transition hover:-translate-y-0.5 hover:bg-base-grey focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-base-amethyst"
         >
           Send another enquiry
         </button>
@@ -87,14 +87,18 @@ export function ContactForm() {
   }
 
   const fieldClass =
-    "mt-2 w-full rounded-md border border-base-deep/15 bg-white px-4 py-3 text-base text-base-deep outline-none transition placeholder:text-base-lavender/50 focus:border-base-amethyst focus:ring-4 focus:ring-base-light";
+    "mt-2 w-full rounded-md border border-base-deep/10 bg-white/92 px-4 py-3.5 text-base text-base-deep shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] outline-none transition placeholder:text-base-lavender/45 hover:border-base-amethyst/35 focus:border-base-amethyst focus:bg-white focus:ring-4 focus:ring-base-light/80";
 
   return (
     <form
       onSubmit={onSubmit}
       noValidate
-      className="grid gap-5 rounded-lg border border-base-light bg-white p-5 shadow-soft md:grid-cols-2 md:p-8"
+      className="surface-card relative grid gap-5 overflow-hidden rounded-lg p-5 md:grid-cols-2 md:p-8"
     >
+      <div
+        className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-base-light via-base-amethyst to-base-lavender"
+        aria-hidden="true"
+      />
       <Field label="Full name" error={errors.name}>
         <input
           className={fieldClass}
@@ -157,7 +161,7 @@ export function ContactForm() {
       <div className="md:col-span-2">
         <button
           type="submit"
-          className="w-full rounded-md bg-base-deep px-6 py-4 text-sm font-semibold text-white shadow-soft transition hover:bg-base-lavender focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-base-amethyst md:w-auto"
+          className="w-full rounded-md bg-base-deep px-6 py-4 text-sm font-semibold text-white shadow-[0_18px_50px_rgba(43,36,65,0.24)] transition hover:-translate-y-0.5 hover:bg-base-lavender focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-base-amethyst md:w-auto"
         >
           Submit Enquiry
         </button>
@@ -181,7 +185,11 @@ function Field({
     <label className={`block text-sm font-semibold text-base-deep ${className}`}>
       {label}
       {children}
-      {error ? <span className="mt-2 block text-sm text-red-700">{error}</span> : null}
+      {error ? (
+        <span className="mt-2 block text-sm font-medium text-red-700">
+          {error}
+        </span>
+      ) : null}
     </label>
   );
 }
